@@ -1,0 +1,88 @@
+<mujoco model="panda scene">
+  <!-- Existing includes and settings remain unchanged -->
+  <include file="bi-franka.xml"/>
+
+  <statistic center="0.3 0 0.4" extent="1"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="140" elevation="-60" fovy="130"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.9" rgb2="0 0 0"
+             width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge"
+             rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"
+             markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane"
+              texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+
+    <!-- A simple material for the table -->
+    <material name="table_material" rgba="0.9 0.5 0.3 1"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+
+      <body name="table" pos=".6 0 0.6" euler="0 0 1.5708">
+
+      <!-- Table top thickness scaled from 0.02 to 0.035 -->
+      <geom name="table_top" type="box"
+            size="0.5 0.3 0.6"
+            material="table_material"
+            contype="1" conaffinity="1"/>
+
+      <!-- Each leg's half-height: 0.34 -> 0.9,
+           and leg center offset: -0.34 -> -0.9
+      <geom name="table_leg1" type="cylinder"
+            pos="0.35 0.15 -1.5"
+            size="0.03 1.5"
+            material="table_material"/>
+      <geom name="table_leg2" type="cylinder"
+            pos="0.35 -0.15 -1.5"
+            size="0.03 1.5"
+            material="table_material"/>
+      <geom name="table_leg3" type="cylinder"
+            pos="-0.35 0.15 -1.5"
+            size="0.03 1.5"
+            material="table_material"/>
+      <geom name="table_leg4" type="cylinder"
+            pos="-0.35 -0.15 -1.5"
+            size="0.03 1.5"
+            material="table_material"/> -->
+
+      <!-- Divider unchanged -->
+      <geom name="divider" type="box"
+            size="0.005 0.3 0.01"
+            pos="0 0 0.6"
+            rgba="0 0 0 1"
+            contype="0" conaffinity="0" density="1000"/>
+    </body>
+
+    <!-- Cubes unchanged -->
+    <body name="cube_left" >
+      <joint name="cube_left_free" type="free"/>
+      <geom name="cube_left_geom" type="box"
+            size="0.03 0.03 0.05"
+            density="500"
+            rgba="1 0 0 1" solimp="0.998 0.998 0.001" solref="0.001 1"/>
+       <site name="target_left" pos="0 0 0.05" size="0.01"/> 
+    </body>
+
+    <body name="cube_right">
+      <joint name="cube_right_free" type="free"/>
+      <geom name="cube_right_geom" type="box"
+            size="0.03 0.03 0.05"
+            density="500"
+            rgba="0 0 1 1" solimp="0.998 0.998 0.001" solref="0.001 1"/>
+      <site name="target_right" pos="0 0 0.05" size="0.01"/> 
+    </body>
+  
+
+..
+  </worldbody>
+
+</mujoco>
