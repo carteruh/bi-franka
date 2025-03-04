@@ -1,6 +1,6 @@
 <mujoco model="panda scene">
   <!-- Existing includes and settings remain unchanged -->
-  <include file="bi-franka.xml"/>
+  <include file="bi-franka-og.xml"/>
 
   <statistic center="0.3 0 0.4" extent="1"/>
 
@@ -27,11 +27,22 @@
     <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
     <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
 
+      <body name="cube_left" pos="0.6 -0.2 1.2"
+        quat="1 0 0 0">
+      <joint name="cube_left_free" type="free"/>
+      <geom name="cube_left_geom" type="box"
+            size="0.03 0.03 0.05"
+            density="500"
+            friction="1.5 0.1 0.01"
+            rgba="1 0 0 1" solimp="0.998 0.998 0.001" solref="0.001 1"/>
+       <site name="target_left" pos="0 0.0 0.05" size="0.01"/> 
+    </body>
+
       <body name="table" pos=".6 0 0.6" euler="0 0 1.5708">
 
       <!-- Table top thickness scaled from 0.02 to 0.035 -->
       <geom name="table_top" type="box"
-            size="0.5 0.3 0.6"
+            size="0.8 0.2 0.6"
             material="table_material"
             contype="1" conaffinity="1"/>
 
@@ -56,33 +67,30 @@
 
       <!-- Divider unchanged -->
       <geom name="divider" type="box"
-            size="0.005 0.3 0.01"
+            size="0.005 0.2 0.01"
             pos="0 0 0.6"
             rgba="0 0 0 1"
-            contype="0" conaffinity="0" density="1000"/>
+            contype="1" conaffinity="1" density="1000"/>
     </body>
 
     <!-- Cubes unchanged -->
-    <body name="cube_left" >
-      <joint name="cube_left_free" type="free"/>
-      <geom name="cube_left_geom" type="box"
-            size="0.03 0.03 0.05"
-            density="500"
-            rgba="1 0 0 1" solimp="0.998 0.998 0.001" solref="0.001 1"/>
-       <site name="target_left" pos="0 0 0.05" size="0.01"/> 
-    </body>
 
-    <body name="cube_right">
-      <joint name="cube_right_free" type="free"/>
+
+    <body name="cube_right" pos= "0.6 0.4 1.2"
+        quat="1 0 0 0" >
+      <joint name="cube_right_free" type="free" />
       <geom name="cube_right_geom" type="box"
             size="0.03 0.03 0.05"
             density="500"
+            friction="1.5 0.1 0.01"
             rgba="0 0 1 1" solimp="0.998 0.998 0.001" solref="0.001 1"/>
-      <site name="target_right" pos="0 0 0.05" size="0.01"/> 
+      <site name="target_right" pos="0 0.0 0.05" size="0.01"/> 
     </body>
   
 
-..
+
   </worldbody>
+
+
 
 </mujoco>

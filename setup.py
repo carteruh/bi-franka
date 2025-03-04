@@ -3,12 +3,7 @@ from setuptools import setup, find_packages
 
 
 INSTALL_REQUIRES = [
-        "numpy",
-        "scipy",
-        "matplotlib",
-        "jax",           # or "jax[cpu]" / "jax[gpu]" depending on your system
-        "mujoco",
-        "mediapy",
+        "pycollimator[safe]"
     ]
 
 setup(

@@ -9,3 +9,7 @@ pip install mujoco
 # Run the visualizer with the bimanual setup
 python -m mujoco.viewer --mjcf resources/bi-franka/scene.xml
 ```
+
+```bash
+python -m bi-manual --xml $PATH_to_XML
+```

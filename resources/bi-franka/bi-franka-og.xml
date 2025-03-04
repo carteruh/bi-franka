@@ -144,7 +144,20 @@
   <worldbody>
     <light name="top" pos="0 0 2" mode="trackcom"/>
 
-         <!-- LEFT PANDA -->
+    <!-- LEFT TABLE -->
+    <body name="fa-table" childclass="table" pos="0 0 0" euler="0 0 1.5707963267948966">
+      <geom name="fa-mesh" mesh="table" class="table-visual" material="table"/>
+      <geom name="fa-mesh_legs" mesh="table_legs" class="table-visual" material="table_legs"/>
+      <geom name="fa-collider_001" mesh="table_collision_001" class="table-collision"/>
+      <geom name="fa-collider_002" mesh="table_collision_002" class="table-collision"/>
+      <geom name="fa-collider_003" mesh="table_collision_003" class="table-collision"/>
+      <geom name="fa-collider_004" mesh="table_collision_004" class="table-collision"/>
+      <geom name="fa-collider_005" mesh="table_collision_005" class="table-collision"/>
+      <geom name="fa-collider_006" mesh="table_collision_006" class="table-collision"/>
+      <geom name="fa-collider_007" mesh="table_collision_007" class="table-collision"/>
+    </body>
+
+    <!-- LEFT PANDA -->
     <body name="fa-link0" childclass="panda" pos="0 -0.35 0.95">
       <inertial mass="0.629769" pos="-0.041018 -0.00014 0.049974"
         fullinertia="0.00315 0.00388 0.004285 8.2904e-7 0.00015 8.2299e-6"/>
@@ -236,7 +249,6 @@
                     <geom mesh="link7_7" material="white" class="visual"/>
                     <geom mesh="link7_c" class="collision"/>
                     <body name="fa-hand" pos="0 0 0.107" quat="0.9238795 0 0 -0.3826834">
-                      <site name="left_grasp_center"  body="fa-hand"  pos="0 0 0.06" size="0.01"/>
                       <inertial mass="0.73" pos="-0.01 0 0.03" diaginertia="0.001 0.0025 0.0017"/>
                       <geom mesh="hand_0" material="off_white" class="visual"/>
                       <geom mesh="hand_1" material="black" class="visual"/>
@@ -278,7 +290,7 @@
       </body>
     </body>
 
-               <!-- RIGHT PANDA -->
+    <!-- RIGHT PANDA -->
     <body name="fb-link0" childclass="panda" pos="0 0.35 0.95">
       <inertial mass="0.629769" pos="-0.041018 -0.00014 0.049974"
         fullinertia="0.00315 0.00388 0.004285 8.2904e-7 0.00015 8.2299e-6"/>
@@ -370,7 +382,6 @@
                     <geom mesh="link7_7" material="white" class="visual"/>
                     <geom mesh="link7_c" class="collision"/>
                     <body name="fb-hand" pos="0 0 0.107" quat="0.9238795 0 0 -0.3826834">
-                      <site name="right_grasp_center" body="fb-hand"  pos="0 0 0.06" size="0.01"/>
                       <inertial mass="0.73" pos="-0.01 0 0.03" diaginertia="0.001 0.0025 0.0017"/>
                       <geom mesh="hand_0" material="off_white" class="visual"/>
                       <geom mesh="hand_1" material="black" class="visual"/>
@@ -411,30 +422,8 @@
         </body>
       </body>
     </body>
- 
-
-  
-
-
- 
-   <!-- LEFT TABLE -->
-    <body name="fa-table" childclass="table" pos="0 0 0" euler="0 0 1.5707963267948966">
-      <geom name="fa-mesh" mesh="table" class="table-visual" material="table"/>
-      <geom name="fa-mesh_legs" mesh="table_legs" class="table-visual" material="table_legs"/>
-      <geom name="fa-collider_001" mesh="table_collision_001" class="table-collision"/>
-      <geom name="fa-collider_002" mesh="table_collision_002" class="table-collision"/>
-      <geom name="fa-collider_003" mesh="table_collision_003" class="table-collision"/>
-      <geom name="fa-collider_004" mesh="table_collision_004" class="table-collision"/>
-      <geom name="fa-collider_005" mesh="table_collision_005" class="table-collision"/>
-      <geom name="fa-collider_006" mesh="table_collision_006" class="table-collision"/>
-      <geom name="fa-collider_007" mesh="table_collision_007" class="table-collision"/>
-    </body>
-
-
-
 
   </worldbody>
-
 
   <tendon>
     <fixed name="fa-split">
@@ -459,8 +448,7 @@
     <general class="panda" name="fa-actuator8" tendon="fa-split" forcerange="-100 100" ctrlrange="0 255" gainprm="0.01568627451 0 0" biasprm="0 -100 -10"/>
   </actuator>
 
-
-    <tendon>
+  <tendon>
     <fixed name="fb-split">
       <joint joint="fb-finger_joint1" coef="0.5"/>
       <joint joint="fb-finger_joint2" coef="0.5"/>
@@ -470,8 +458,8 @@
   <equality>
     <joint joint1="fb-finger_joint1" joint2="fb-finger_joint2" solimp="0.95 0.99 0.001" solref="0.005 1"/>
   </equality>
-  <actuator>
 
+  <actuator>
     <general class="panda" name="fb-actuator1" joint="fb-joint1" gainprm="4500" biasprm="0 -4500 -450"/>
     <general class="panda" name="fb-actuator2" joint="fb-joint2" gainprm="4500" biasprm="0 -4500 -450" ctrlrange="-1.7628 1.7628"/>
     <general class="panda" name="fb-actuator3" joint="fb-joint3" gainprm="3500" biasprm="0 -3500 -350"/>
@@ -483,22 +471,7 @@
     <general class="panda" name="fb-actuator8" tendon="fb-split" forcerange="-100 100" ctrlrange="0 255" gainprm="0.01568627451 0 0" biasprm="0 -100 -10"/>
   </actuator>
 
-
-
-
-
-  <!-- 
-    32 qpos floats:
-      (1) Left arm (9 DOFs)
-      (2) Right arm (9 DOFs)
-      (3) Left cube free joint (7 DOFs)
-      (4) Right cube free joint (7 DOFs)
-
-    16 ctrl floats:
-      (1) Left arm (8 actuators)
-      (2) Right arm (8 actuators)
-  -->
-<keyframe>
+  <keyframe>
   <key name="home"
        qpos="
         0 0 0 -1.57079 0 1.57079 -0.7853 0.04 0.04
@@ -513,7 +486,5 @@
        "
       />
   </keyframe>
-
-
 
 </mujoco>
