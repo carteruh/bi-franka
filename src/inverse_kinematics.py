@@ -53,12 +53,4 @@ class InverseKinematics(collimator.LeafSystem):
             # push away from the other EEF
             self.error[:3] += alpha * (d_min - dist) * (diff / dist)
 
-        # 3) Solve: J dq = error
-        
-        # Regularization term for pseudo-inverse computation
-        # lambda_gain = 1e^-3
-
-        # Solve: J dq = error with regularization
-        # dq = np.linalg.solve(jac.T @ jac + lambda_gain * np.eye(30), jac.T @ self.error)
         return  np.linalg.pinv(jac) @ self.error
-        # return dq
